@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using QuickGraph.Algorithms.ShortestPath;
 
 namespace QuickGraph.Algorithms.Observers
@@ -30,10 +29,6 @@ namespace QuickGraph.Algorithms.Observers
             IDistanceRelaxer distanceRelaxer,
             IDictionary<TVertex, double> distances)
         {
-            Contract.Requires(edgeWeights != null);
-            Contract.Requires(distanceRelaxer != null);
-            Contract.Requires(distances != null);
-
             this.edgeWeights = edgeWeights;
             this.distanceRelaxer = distanceRelaxer;
             this.distances = distances;

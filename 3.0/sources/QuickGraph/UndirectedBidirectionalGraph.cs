@@ -1,8 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph
 {
@@ -20,8 +19,6 @@ namespace QuickGraph
 
         public UndirectedBidirectionalGraph(IBidirectionalGraph<TVertex, TEdge> visitedGraph)
         {
-            Contract.Requires(visitedGraph != null);
-
             this.visitedGraph = visitedGraph;
         }
 
@@ -40,7 +37,6 @@ namespace QuickGraph
 
         #region IUndirectedGraph<Vertex,Edge> Members
 
-        [Pure]
         public IEnumerable<TEdge> AdjacentEdges(TVertex v)
         {
             foreach (var e in this.VisitedGraph.OutEdges(v))
@@ -55,25 +51,21 @@ namespace QuickGraph
             }
         }
 
-        [Pure]
         public int AdjacentDegree(TVertex v)
         {
             return this.VisitedGraph.Degree(v);
         }
 
-        [Pure]
         public bool IsAdjacentEdgesEmpty(TVertex v)
         {
             return this.VisitedGraph.IsOutEdgesEmpty(v) && this.VisitedGraph.IsInEdgesEmpty(v);
         }
 
-        [Pure]
         public TEdge AdjacentEdge(TVertex v, int index)
         {
             throw new NotSupportedException();
         }
 
-        [Pure]
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             throw new NotSupportedException();
@@ -102,7 +94,6 @@ namespace QuickGraph
             get { return this.VisitedGraph.Vertices; }
         }
 
-        [Pure]
         public bool ContainsVertex(TVertex vertex)
         {
             return this.VisitedGraph.ContainsVertex(vertex);
@@ -127,7 +118,6 @@ namespace QuickGraph
             get { return this.VisitedGraph.Edges; }
         }
 
-        [Pure]
         public bool ContainsEdge(TEdge edge)
         {
             return this.VisitedGraph.ContainsEdge(edge);

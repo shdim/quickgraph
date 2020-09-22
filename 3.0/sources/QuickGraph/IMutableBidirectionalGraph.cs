@@ -1,13 +1,10 @@
-﻿using System.Diagnostics.Contracts;
-using QuickGraph.Contracts;
-namespace QuickGraph
+﻿namespace QuickGraph
 {
     /// <summary>
     /// A mutable bidirectional directed graph
     /// </summary>
     /// <typeparam name="TVertex">type of the vertices</typeparam>
     /// <typeparam name="TEdge">type of the edges</typeparam>
-    [ContractClass(typeof(IMutableBidirectionalGraphContract<,>))]
     public interface IMutableBidirectionalGraph<TVertex,TEdge> 
         : IMutableVertexAndEdgeListGraph<TVertex,TEdge>
         , IBidirectionalGraph<TVertex,TEdge>

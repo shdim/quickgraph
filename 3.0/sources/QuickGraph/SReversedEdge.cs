@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 
 namespace QuickGraph
@@ -23,8 +22,6 @@ namespace QuickGraph
         private readonly TEdge originalEdge;
         public SReversedEdge(TEdge originalEdge)
         {
-            Contract.Requires(originalEdge != null);
-
             this.originalEdge = originalEdge;
         }
 
@@ -43,7 +40,6 @@ namespace QuickGraph
             get { return this.OriginalEdge.Source; }
         }
         
-        [Pure]
         public override bool Equals(object obj)
         {
             if (!(obj is SReversedEdge<TVertex, TEdge>))
@@ -52,19 +48,16 @@ namespace QuickGraph
             return Equals((SReversedEdge<TVertex, TEdge>)obj);
         }
 
-        [Pure]
         public override int GetHashCode()
         {
             return this.OriginalEdge.GetHashCode() ^ 16777619;
         }
 
-        [Pure]
         public override string ToString()
         {
             return String.Format("R({0})", this.OriginalEdge);
         }
 
-        [Pure]
         public bool Equals(SReversedEdge<TVertex, TEdge> other)
         {
             return this.OriginalEdge.Equals(other.OriginalEdge);

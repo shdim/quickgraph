@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using QuickGraph.Predicates;
-using System.Diagnostics.Contracts;
 using QuickGraph.Collections;
 
 namespace QuickGraph.Algorithms.Exploration
@@ -41,13 +40,11 @@ namespace QuickGraph.Algorithms.Exploration
             set { this.successorEdgePredicate = value; }
         }
 
-        [Pure]
         public bool IsOutEdgesEmpty(TVertex v)
         {
             return this.OutDegree(v) == 0;
         }
 
-        [Pure]
         public int OutDegree(TVertex v)
         {
             int i = 0;
@@ -56,13 +53,11 @@ namespace QuickGraph.Algorithms.Exploration
             return i;
         }
 
-        [Pure]
         public bool ContainsVertex(TVertex vertex)
         {
             return this.vertedEdges.ContainsKey(vertex);
         }
 
-        [Pure]
         public IEnumerable<TEdge> OutEdges(TVertex v)
         {
             IEdgeList<TVertex, TEdge> edges;
@@ -87,14 +82,12 @@ namespace QuickGraph.Algorithms.Exploration
             return edges;
         }
 
-        [Pure]
         public bool TryGetOutEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
             edges = this.OutEdges(v);
             return true;
         }
 
-        [Pure]
         public TEdge OutEdge(TVertex v, int index)
         {
             int i = 0;

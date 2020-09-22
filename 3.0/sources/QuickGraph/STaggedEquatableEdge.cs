@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
@@ -26,9 +25,6 @@ namespace QuickGraph
 
         public STaggedEquatableEdge(TVertex source, TVertex target, TTag tag)
         {
-            Contract.Requires(source != null);
-            Contract.Requires(target != null);
-
             this.source = source;
             this.target = target;
             this.tag = tag;
@@ -90,12 +86,6 @@ namespace QuickGraph
         /// </returns>
         public bool Equals(STaggedEquatableEdge<TVertex,TTag> other)
         {
-            Contract.Ensures(
-                Contract.Result<bool>() ==
-                (this.Source.Equals(other.Source) &&
-                this.Target.Equals(other.Target))
-                );
-
             return
                 this.source.Equals(other.source) &&
                 this.target.Equals(other.target);

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using QuickGraph.Contracts;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph
 {
@@ -12,7 +10,6 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex"></typeparam>
     /// <typeparam name="TEdge"></typeparam>
-    [ContractClass(typeof(IMutableVertexAndEdgeSetContract<,>))]
     public interface IMutableVertexAndEdgeSet<TVertex,TEdge>
         : IEdgeListGraph<TVertex, TEdge>
         , IMutableVertexSet<TVertex>

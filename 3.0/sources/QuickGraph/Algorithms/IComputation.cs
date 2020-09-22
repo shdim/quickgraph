@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms
 {
-    [ContractClass(typeof(Contracts.IComputationContract))]
     public interface IComputation
     {
         object SyncRoot { get; }

@@ -1,10 +1,9 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Observers;
 using QuickGraph.Collections;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 using System.Diagnostics;
 
 namespace QuickGraph.Algorithms.ShortestPath
@@ -68,8 +67,6 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         private void InternalTreeEdge(Object sender, UndirectedEdgeEventArgs<TVertex, TEdge> args)
         {
-            Contract.Requires(args != null);
-
             bool decreased = Relax(args.Edge, args.Source, args.Target);
             if (decreased)
                 this.OnTreeEdge(args.Edge, args.Reversed);
@@ -79,8 +76,6 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         private void InternalGrayTarget(Object sender, UndirectedEdgeEventArgs<TVertex, TEdge> args)
         {
-            Contract.Requires(args != null);
-
             bool decreased = Relax(args.Edge, args.Source, args.Target);
             if (decreased)
             {
@@ -103,7 +98,7 @@ namespace QuickGraph.Algorithms.ShortestPath
             var vertices = this.vertexQueue.ToArray();
             for (int i = 1; i < vertices.Length; ++i)
                 if (this.Distances[top] > this.Distances[vertices[i]])
-                    Contract.Assert(false);
+                    System.Diagnostics.Contracts.Contract.Assert(false);
         }
 
         protected override void Initialize()
@@ -135,10 +130,6 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         private void ComputeFromRoot(TVertex rootVertex)
         {
-            Contract.Requires(rootVertex != null);
-            Contract.Requires(this.VisitedGraph.ContainsVertex(rootVertex));
-            Contract.Requires(this.VertexColors[rootVertex] == GraphColor.White);
-
             this.VertexColors[rootVertex] = GraphColor.Gray;
             this.Distances[rootVertex] = 0;
             this.ComputeNoInit(rootVertex);
@@ -146,9 +137,6 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         public void ComputeNoInit(TVertex s)
         {
-            Contract.Requires(s != null);
-            Contract.Requires(this.VisitedGraph.ContainsVertex(s));
-
             UndirectedBreadthFirstSearchAlgorithm<TVertex, TEdge> bfs = null;
             try
             {

@@ -1,7 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Predicates
 {
@@ -33,7 +32,6 @@ namespace QuickGraph.Predicates
             }
         }
 
-        [Pure]
         public IEnumerable<TEdge> AdjacentEdges(TVertex v)
         {
             if (this.VertexPredicate(v))
@@ -46,7 +44,6 @@ namespace QuickGraph.Predicates
             }
         }
 
-        [Pure]
         public int AdjacentDegree(TVertex v)
         {
             int count = 0;
@@ -55,7 +52,6 @@ namespace QuickGraph.Predicates
             return count;
         }
 
-        [Pure]
         public bool IsAdjacentEdgesEmpty(TVertex v)
         {
             foreach (var edge in this.AdjacentEdges(v))
@@ -63,7 +59,6 @@ namespace QuickGraph.Predicates
             return true;
         }
 
-        [Pure]
         public TEdge AdjacentEdge(TVertex v, int index)
         {
             if (this.VertexPredicate(v))
@@ -102,7 +97,6 @@ namespace QuickGraph.Predicates
             return false;
         }
 
-        [Pure]
         public bool ContainsEdge(TVertex source, TVertex target)
         {
             TEdge edge;
@@ -140,7 +134,6 @@ namespace QuickGraph.Predicates
             }
         }
 
-        [Pure]
         public bool ContainsEdge(TEdge edge)
         {
             if (!this.TestEdge(edge))
@@ -179,7 +172,6 @@ namespace QuickGraph.Predicates
             }
         }
 
-        [Pure]
         public bool ContainsVertex(TVertex vertex)
         {
             if (!this.VertexPredicate(vertex))

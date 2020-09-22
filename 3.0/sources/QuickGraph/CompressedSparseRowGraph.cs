@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics.Contracts;
 using System.Diagnostics;
 
 namespace QuickGraph
@@ -33,11 +32,6 @@ namespace QuickGraph
             public readonly int End;
             public Range(int start, int end)
             {
-                Contract.Requires(start >= 0);
-                Contract.Requires(start <= end);
-                Contract.Ensures(Contract.ValueAtReturn(out this).Start == start);
-                Contract.Ensures(Contract.ValueAtReturn(out this).End == end);
-
                 this.Start = start;
                 this.End = end;
             }
@@ -45,7 +39,6 @@ namespace QuickGraph
             public int Length
             {
                 get {
-                    Contract.Ensures(Contract.Result<int>() >= 0);
 
                     return this.End - this.Start;
                 }
@@ -60,9 +53,6 @@ namespace QuickGraph
             TVertex[] outEdges
             )
         {
-            Contract.Requires(outEdgeStartRanges != null);
-            Contract.Requires(outEdges != null);
-
             this.outEdgeStartRanges = outEdgeStartRanges;
             this.outEdges = outEdges;
         }
@@ -72,9 +62,6 @@ namespace QuickGraph
             )
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(visitedGraph != null);
-            Contract.Ensures(Contract.Result<CompressedSparseRowGraph<TVertex>>() != null);
-
             var outEdgeStartRanges = new Dictionary<TVertex, Range>(visitedGraph.VertexCount);
             var outEdges = new TVertex[visitedGraph.EdgeCount];
 
@@ -88,9 +75,7 @@ namespace QuickGraph
                 outEdgeStartRanges.Add(vertex, range);
                 foreach (var edge in visitedGraph.OutEdges(vertex))
                     outEdges[index++] = edge.Target;
-                Contract.Assert(index == end);
             }
-            Contract.Assert(index == outEdges.Length);
 
             return new CompressedSparseRowGraph<TVertex>(
                 outEdgeStartRanges,
@@ -227,7 +212,6 @@ namespace QuickGraph
         {
             var range = this.outEdgeStartRanges[v];
             var targetIndex = range.Start + index;
-            Contract.Assert(targetIndex < range.End);
             return new SEquatableEdge<TVertex>(v, this.outEdges[targetIndex]);
         }
 

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph
 {
@@ -26,8 +25,6 @@ namespace QuickGraph
             TryFunc<TVertex, IEnumerable<TEdge>> tryGetInEdges)
             :base(tryGetOutEdges)
         {
-            Contract.Requires(tryGetInEdges != null);
-
             this.tryGetInEdges = tryGetInEdges;
         }
 

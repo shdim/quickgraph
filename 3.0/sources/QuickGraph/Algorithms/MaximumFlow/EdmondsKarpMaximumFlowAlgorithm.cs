@@ -5,7 +5,6 @@ using QuickGraph.Algorithms.Observers;
 using QuickGraph.Predicates;
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.MaximumFlow
 {
@@ -62,9 +61,6 @@ namespace QuickGraph.Algorithms.MaximumFlow
 			TVertex sink
 			)
 		{
-            Contract.Requires(source != null);
-            Contract.Requires(sink != null);
-
 			TEdge e;
 			TVertex u;
 

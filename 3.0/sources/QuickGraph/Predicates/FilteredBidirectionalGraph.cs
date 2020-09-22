@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Predicates
 {
@@ -21,13 +20,11 @@ namespace QuickGraph.Predicates
             :base(baseGraph,vertexPredicate,edgePredicate)
         { }
 
-        [Pure]
         public bool IsInEdgesEmpty(TVertex v)
         {
             return this.InDegree(v) == 0;
         }
 
-        [Pure]
         public int InDegree(TVertex v)
         {
             int count = 0;
@@ -37,7 +34,6 @@ namespace QuickGraph.Predicates
             return count;
         }
 
-        [Pure]
         public IEnumerable<TEdge> InEdges(TVertex v)
         {
             foreach (var edge in this.BaseGraph.InEdges(v))
@@ -45,7 +41,6 @@ namespace QuickGraph.Predicates
                     yield return edge;
         }
 
-        [Pure]
         public bool TryGetInEdges(TVertex v, out IEnumerable<TEdge> edges)
         {
             if (this.ContainsVertex(v))
@@ -60,7 +55,6 @@ namespace QuickGraph.Predicates
             }
         }
 
-        [Pure]
         public int Degree(TVertex v)
         {
             return this.OutDegree(v) + this.InDegree(v);
@@ -99,7 +93,6 @@ namespace QuickGraph.Predicates
             }
         }
 
-        [Pure]
         public bool ContainsEdge(TEdge edge)
         {
             if (!this.TestEdge(edge))
@@ -107,7 +100,6 @@ namespace QuickGraph.Predicates
             return this.BaseGraph.ContainsEdge(edge);
         }
 
-        [Pure]
         public TEdge InEdge(TVertex v, int index)
         {
             throw new NotSupportedException();

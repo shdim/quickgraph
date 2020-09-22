@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace QuickGraph
@@ -28,12 +27,6 @@ namespace QuickGraph
             TryFunc<TVertex, IEnumerable<TEdge>> tryGetOutEdges)
             : base(tryGetOutEdges)
         {
-            Contract.Requires(vertices != null);
-            Contract.Requires(Enumerable.All(vertices, v =>
-            {
-                IEnumerable<TEdge> edges;
-                return tryGetOutEdges(v, out edges);
-            }));
             this.vertices = vertices;
         }
 

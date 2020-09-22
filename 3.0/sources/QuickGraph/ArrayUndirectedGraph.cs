@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics.Contracts;
 using System.Diagnostics;
 
 namespace QuickGraph
@@ -30,8 +29,6 @@ namespace QuickGraph
         public ArrayUndirectedGraph(
             IUndirectedGraph<TVertex, TEdge> graph)
         {
-            Contract.Requires(graph != null);
-
             this.edgeEqualityComparer = graph.EdgeEqualityComparer;
             this.edgeCount = graph.EdgeCount;
             this.vertexEdges = new Dictionary<TVertex, TEdge[]>(graph.VertexCount);

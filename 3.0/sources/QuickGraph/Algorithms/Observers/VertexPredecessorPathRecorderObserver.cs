@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.Observers
 {
@@ -29,7 +28,6 @@ namespace QuickGraph.Algorithms.Observers
         public VertexPredecessorPathRecorderObserver(
             IDictionary<TVertex, TEdge> vertexPredecessors)
         {
-            Contract.Requires(vertexPredecessors != null);
             this.vertexPredecessors = vertexPredecessors;
         }
 

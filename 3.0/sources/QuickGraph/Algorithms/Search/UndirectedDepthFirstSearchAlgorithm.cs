@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.Search
 {
@@ -83,9 +82,6 @@ namespace QuickGraph.Algorithms.Search
             )
             : base(host, visitedGraph)
         {
-            Contract.Requires(colors != null);
-            Contract.Requires(adjacentEdgeEnumerator != null);
-
             this.colors = colors;
             this.adjacentEdgeEnumerator = adjacentEdgeEnumerator;
         }
@@ -116,7 +112,6 @@ namespace QuickGraph.Algorithms.Search
             }
             set
             {
-                Contract.Requires(value > 0);
                 this.maxDepth = value;
             }
         }
@@ -124,8 +119,6 @@ namespace QuickGraph.Algorithms.Search
         public event VertexAction<TVertex> InitializeVertex;
         private void OnInitializeVertex(TVertex v)
         {
-            Contract.Requires(v != null);
-
             var eh = this.InitializeVertex;
             if (eh != null)
                 eh(v);
@@ -134,8 +127,6 @@ namespace QuickGraph.Algorithms.Search
         public event VertexAction<TVertex> StartVertex;
         private void OnStartVertex(TVertex v)
         {
-            Contract.Requires(v != null);
-
             var eh = this.StartVertex;
             if (eh != null)
                 eh(v);
@@ -144,8 +135,6 @@ namespace QuickGraph.Algorithms.Search
         public event VertexAction<TVertex> VertexMaxDepthReached;
         private void OnVertexMaxDepthReached(TVertex v)
         {
-            Contract.Requires(v != null);
-
             var eh = this.VertexMaxDepthReached;
             if (eh != null)
                 eh(v);
@@ -247,10 +236,6 @@ namespace QuickGraph.Algorithms.Search
                 IEnumerator<TEdge> edges, 
                 int depth)
             {
-                Contract.Requires(vertex != null);
-                Contract.Requires(edges != null);
-                Contract.Requires(depth >= 0);
-
                 this.Vertex = vertex;
                 this.Edges = edges;
                 this.Depth = depth;
@@ -259,8 +244,6 @@ namespace QuickGraph.Algorithms.Search
 
         public void Visit(TVertex root)
         {
-            Contract.Requires(root != null);
-
             var todo = new Stack<SearchFrame>();
             var oee = this.AdjacentEdgeEnumerator;
             var visitedEdges = new Dictionary<TEdge, int>(this.VisitedGraph.EdgeCount);

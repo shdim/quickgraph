@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph
 {
@@ -29,12 +28,6 @@ namespace QuickGraph
              bool allowParallelEdges)
             : base(tryGetAdjacentEdges, allowParallelEdges)
         {
-            Contract.Requires(vertices != null);
-            Contract.Requires(Enumerable.All(vertices, v =>
-            {
-                IEnumerable<TEdge> edges;
-                return tryGetAdjacentEdges(v, out edges);
-            }));
             this.vertices = vertices;
         }
 

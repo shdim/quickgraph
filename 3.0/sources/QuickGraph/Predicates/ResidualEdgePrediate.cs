@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Predicates
 {
@@ -12,8 +11,6 @@ namespace QuickGraph.Predicates
         public ResidualEdgePredicate(
             IDictionary<TEdge,double> residualCapacities)
 		{
-            Contract.Requires(residualCapacities != null);
-
             this.residualCapacities = residualCapacities;
 		}
 
@@ -27,7 +24,6 @@ namespace QuickGraph.Predicates
 
 		public bool Test(TEdge e)
 		{
-            Contract.Requires(e != null);
 			return 0 < this.residualCapacities[e];
 		}
     }

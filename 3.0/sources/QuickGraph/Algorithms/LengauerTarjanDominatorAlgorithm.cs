@@ -5,7 +5,6 @@ using System.Text;
 using QuickGraph.Algorithms.Services;
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Observers;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms
 {
@@ -104,8 +103,6 @@ namespace QuickGraph.Algorithms
             public readonly List<TVertex> Vertices;
             public TimeStampObserver(List<TVertex> vertices)
             {
-                Contract.Requires(vertices != null);
-
                 this.Vertices = vertices;
             }
 

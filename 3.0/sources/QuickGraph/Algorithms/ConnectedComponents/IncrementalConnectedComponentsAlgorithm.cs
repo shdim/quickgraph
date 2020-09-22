@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using QuickGraph.Algorithms.Services;
 using QuickGraph.Collections;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.ConnectedComponents
 {
@@ -43,7 +42,6 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         {
             get
             {
-                Contract.Assert(this.ds != null);
                 return this.ds.SetCount;
             }
         }
@@ -56,13 +54,6 @@ namespace QuickGraph.Algorithms.ConnectedComponents
         /// <returns></returns>
         public KeyValuePair<int, IDictionary<TVertex, int>> GetComponents()
         {
-            Contract.Ensures(
-                Contract.Result<KeyValuePair<int, IDictionary<TVertex, int>>>().Key == this.ComponentCount);
-            Contract.Ensures(
-                Contract.Result<KeyValuePair<int, IDictionary<TVertex, int>>>().Value.Count == this.VisitedGraph.VertexCount);
-            // TODO: more contracts
-            Contract.Assert(this.ds != null);
-            
             var representatives = new Dictionary<TVertex, int>(this.ds.SetCount);
             if (this.components == null)
                 this.components = new Dictionary<TVertex, int>(this.VisitedGraph.VertexCount);

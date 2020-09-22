@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph
 {
@@ -22,8 +21,6 @@ namespace QuickGraph
         /// <param name="edge">The edge.</param>
         public EdgeEventArgs(TEdge edge)
         {
-            Contract.Requires(edge != null);
-
             this.edge = edge;
         }
 

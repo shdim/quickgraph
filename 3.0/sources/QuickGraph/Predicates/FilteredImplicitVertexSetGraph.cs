@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 namespace QuickGraph.Predicates
 {
 #if !SILVERLIGHT
@@ -20,7 +19,6 @@ namespace QuickGraph.Predicates
             :base(baseGraph,vertexPredicate,edgePredicate)
         { }
 
-        [Pure]
         public bool ContainsVertex(TVertex vertex)
         {
             return

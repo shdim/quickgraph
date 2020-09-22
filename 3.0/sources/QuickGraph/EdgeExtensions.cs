@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using QuickGraph.Collections;
 using System.Linq;
 
@@ -24,7 +23,6 @@ namespace QuickGraph
         /// <typeparam name="TEdge">type of the edges</typeparam>
         /// <param name="edge"></param>
         /// <returns></returns>
-        [Pure]
         public static bool IsSelfEdge<TVertex, TEdge>(
 #if !NET20
 this 
@@ -32,9 +30,6 @@ this
             TEdge edge)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(edge != null);
-            Contract.Ensures(Contract.Result<bool>() == (edge.Source.Equals(edge.Target)));
-
             return edge.Source.Equals(edge.Target);
         }
 
@@ -46,7 +41,6 @@ this
         /// <param name="edge">must not be a self-edge</param>
         /// <param name="vertex"></param>
         /// <returns></returns>
-        [Pure]
         public static TVertex GetOtherVertex<TVertex, TEdge>(
 #if !NET20
 this 
@@ -54,13 +48,6 @@ this
             TEdge edge, TVertex vertex)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(edge != null);
-            Contract.Requires(vertex != null);
-            Contract.Requires(!edge.Source.Equals(edge.Target));
-            Contract.Requires(edge.Source.Equals(vertex) || edge.Target.Equals(vertex));
-            Contract.Ensures(Contract.Result<TVertex>() != null);
-            Contract.Ensures(Contract.Result<TVertex>().Equals(edge.Source.Equals(vertex) ? edge.Target : edge.Source));
-            
             return edge.Source.Equals(vertex) ? edge.Target : edge.Source;
         }
 
@@ -73,7 +60,6 @@ this
         /// <param name="edge"></param>
         /// <param name="vertex"></param>
         /// <returns></returns>
-        [Pure]
         public static bool IsAdjacent<TVertex, TEdge>(
 #if !NET20
 this 
@@ -81,17 +67,10 @@ this
             TEdge edge, TVertex vertex)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(edge != null);
-            Contract.Requires(vertex != null);
-            //Contract.Ensures(Contract.Result<bool>() ==
-            //    (edge.Source.Equals(vertex) || edge.Target.Equals(vertex))
-            //    );
-
             return edge.Source.Equals(vertex) 
                 || edge.Target.Equals(vertex);
         }
 
-        [Pure]
         public static bool IsPath<TVertex, TEdge>(
 #if !NET20
 this 
@@ -99,9 +78,6 @@ this
             IEnumerable<TEdge> path)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(path != null);
-            Contract.Requires(typeof(TEdge).IsValueType || Enumerable.All(path, e => e != null));
-
             bool first = true;
             TVertex lastTarget = default(TVertex);
             foreach (var edge in path)
@@ -122,7 +98,6 @@ this
             return true;
         }
 
-        [Pure]
         public static bool HasCycles<TVertex, TEdge>(
 #if !NET20
 this 
@@ -130,9 +105,6 @@ this
             IEnumerable<TEdge> path)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(path != null);
-            Contract.Requires(typeof(TEdge).IsValueType || Enumerable.All(path, e => e != null));
-
             var vertices = new Dictionary<TVertex, int>();
             bool first = true;
             foreach (var edge in path)
@@ -156,7 +128,6 @@ this
             return false;
         }
 
-        [Pure]
         public static bool IsPathWithoutCycles<TVertex, TEdge>(
 #if !NET20
 this 
@@ -164,10 +135,6 @@ this
             IEnumerable<TEdge> path)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(path != null);
-            Contract.Requires(typeof(TEdge).IsValueType || Enumerable.All(path, e => e != null));
-            Contract.Requires(IsPath<TVertex, TEdge>(path));
-
             var vertices = new Dictionary<TVertex, int>();
             bool first = true;
             TVertex lastTarget = default(TVertex);
@@ -211,10 +178,6 @@ this
             TEdge edge)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(edge != null);
-            Contract.Ensures(Contract.Result<SEquatableEdge<TVertex>>().Source.Equals(edge.Source));
-            Contract.Ensures(Contract.Result<SEquatableEdge<TVertex>>().Target.Equals(edge.Target));
-
             return new SEquatableEdge<TVertex>(edge.Source, edge.Target);
         }
 
@@ -236,13 +199,6 @@ this
             TVertex vertex)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(predecessors != null);
-            Contract.Requires(root != null);
-            Contract.Requires(vertex != null);
-            Contract.Requires(
-                typeof(TEdge).IsValueType || 
-                Enumerable.All(predecessors.Values, e => e != null));
-
             var current = vertex;
             if (root.Equals(current)) 
                 return true;
@@ -279,21 +235,6 @@ this
             out IEnumerable<TEdge> result)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(predecessors != null);
-            Contract.Requires(v != null);
-            Contract.Requires(
-                typeof(TEdge).IsValueType ||
-                Enumerable.All(predecessors.Values, e => e != null));
-            Contract.Ensures(
-                !Contract.Result<bool>() ||
-                (Contract.ValueAtReturn<IEnumerable<TEdge>>(out result) != null &&
-                 (typeof(TEdge).IsValueType ||
-                 Enumerable.All(
-                    Contract.ValueAtReturn<IEnumerable<TEdge>>(out result),
-                    e => e != null))
-                )
-            );
-
             var path = new List<TEdge>();
 
             TVertex vc = v;
@@ -353,10 +294,6 @@ this
             TVertex target)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(edge != null);
-            Contract.Requires(source != null);
-            Contract.Requires(target != null);
-
             return (edge.Source.Equals(source) && edge.Target.Equals(target)) ||
                 (edge.Target.Equals(source) && edge.Source.Equals(target));
         }
@@ -379,11 +316,6 @@ TEdge edge,
             TVertex target)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(edge != null);
-            Contract.Requires(source != null);
-            Contract.Requires(target != null);
-            Contract.Requires(Comparer<TVertex>.Default.Compare(source, target) <= 0);
-
             return edge.Source.Equals(source) && edge.Target.Equals(target);
         }
 
@@ -395,10 +327,6 @@ TEdge edge,
         public static IEnumerable<SReversedEdge<TVertex, TEdge>> ReverseEdges<TVertex, TEdge>(IEnumerable<TEdge> edges)
             where TEdge : IEdge<TVertex>
         {
-            Contract.Requires(edges != null);
-            Contract.Requires(Enumerable.All(edges, e => e != null));
-            Contract.Ensures(Contract.Result<IEnumerable<SReversedEdge<TVertex, TEdge>>>() != null);
-
             foreach (var edge in edges)
                 yield return new SReversedEdge<TVertex, TEdge>(edge);
         }

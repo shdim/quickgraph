@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using QuickGraph.Algorithms.Services;
 using QuickGraph.Algorithms.ShortestPath;
-using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace QuickGraph.Algorithms.RankedShortestPath
@@ -22,9 +21,6 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             get { return this.shortestPathCount; }
             set
             {
-                Contract.Requires(value > 1);
-                Contract.Ensures(this.ShortestPathCount == value);
-
                 this.shortestPathCount = value;
             }
         }
@@ -33,8 +29,6 @@ namespace QuickGraph.Algorithms.RankedShortestPath
         {
             get
             {
-                Contract.Ensures(Contract.Result<int>() == Enumerable.Count(this.ComputedShortestPaths));
-
                 return this.computedShortestPaths == null ? 0 : this.computedShortestPaths.Count;
             }
         }
@@ -53,9 +47,6 @@ namespace QuickGraph.Algorithms.RankedShortestPath
 
         protected void AddComputedShortestPath(List<TEdge> path)
         {
-            Contract.Requires(path != null);
-            Contract.Requires(Enumerable.All(path, e => e != null));
-
             var pathArray = path.ToArray();
             this.computedShortestPaths.Add(pathArray);
         }
@@ -71,8 +62,6 @@ namespace QuickGraph.Algorithms.RankedShortestPath
             IDistanceRelaxer distanceRelaxer)
             : base(host, visitedGraph)
         {
-            Contract.Requires(distanceRelaxer != null);
-
             this.distanceRelaxer = distanceRelaxer;
         }
 

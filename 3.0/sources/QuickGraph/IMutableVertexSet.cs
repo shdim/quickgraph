@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using QuickGraph.Contracts;
 
 namespace QuickGraph
 {
@@ -9,7 +7,6 @@ namespace QuickGraph
     /// A mutable vertex set
     /// </summary>
     /// <typeparam name="TVertex"></typeparam>
-    [ContractClass(typeof(IMutableVertexSetContract<>))]
     public interface IMutableVertexSet<TVertex>
         : IVertexSet<TVertex>
     {

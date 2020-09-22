@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using QuickGraph.Collections;
 using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.Search
 {
@@ -57,10 +56,6 @@ namespace QuickGraph.Algorithms.Search
             )
             : base(host, visitedGraph)
         {
-            Contract.Requires(vertexQueue != null);
-            Contract.Requires(vertexColors != null);
-            Contract.Requires(outEdgeEnumerator != null);
-
             this.vertexColors = vertexColors;
             this.vertexQueue = vertexQueue;
             this.outEdgeEnumerator = outEdgeEnumerator;

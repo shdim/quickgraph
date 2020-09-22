@@ -1,5 +1,4 @@
-using System;
-using System.Diagnostics.Contracts;
+﻿using System;
 
 namespace QuickGraph.Predicates
 {
@@ -15,16 +14,11 @@ namespace QuickGraph.Predicates
 
         public IsolatedVertexPredicate(IBidirectionalGraph<TVertex,TEdge> visitedGraph)
         {
-            Contract.Requires(visitedGraph!=null);
-
             this.visitedGraph = visitedGraph;
         }
 
-        [Pure]
         public bool Test(TVertex v)
         {
-            Contract.Requires(v != null);
-
             return this.visitedGraph.IsInEdgesEmpty(v)
                 && this.visitedGraph.IsOutEdgesEmpty(v);
         }

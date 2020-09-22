@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.MaximumFlow
 {
@@ -27,8 +26,6 @@ namespace QuickGraph.Algorithms.MaximumFlow
             )
             : base(host, visitedGraph)
         {
-            Contract.Requires(capacities != null);
-            
             this.Capacities = capacities;
             this.Predecessors = new Dictionary<TVertex, TEdge>();
             this.EdgeFactory = edgeFactory;
@@ -60,7 +57,6 @@ namespace QuickGraph.Algorithms.MaximumFlow
             get { return this.source; }
             set 
             {
-                Contract.Requires(value != null);
                 this.source = value; 
             }
         }
@@ -70,7 +66,6 @@ namespace QuickGraph.Algorithms.MaximumFlow
             get { return this.sink; }
             set 
             {
-                Contract.Requires(value != null);
                 this.sink = value; 
             }
         }

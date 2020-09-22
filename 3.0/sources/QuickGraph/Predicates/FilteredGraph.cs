@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Predicates
 {
@@ -20,10 +19,6 @@ namespace QuickGraph.Predicates
             EdgePredicate<TVertex, TEdge> edgePredicate
             )
         {
-            Contract.Requires(baseGraph != null);
-            Contract.Requires(vertexPredicate != null);
-            Contract.Requires(edgePredicate != null);
-
             this.baseGraph = baseGraph;
             this.vertexPredicate = vertexPredicate;
             this.edgePredicate = edgePredicate;

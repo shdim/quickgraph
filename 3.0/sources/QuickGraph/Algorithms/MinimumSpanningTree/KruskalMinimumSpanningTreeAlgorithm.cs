@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using QuickGraph.Collections;
-using System.Diagnostics.Contracts;
 using QuickGraph.Algorithms.Services;
 
 namespace QuickGraph.Algorithms.MinimumSpanningTree
@@ -31,8 +30,6 @@ namespace QuickGraph.Algorithms.MinimumSpanningTree
             )
             :base(host, visitedGraph)
         {
-            Contract.Requires(edgeWeights != null);
-
             this.edgeWeights = edgeWeights;
         }
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.MaximumFlow;
-using System.Diagnostics.Contracts;
 using System.Diagnostics;
 
 namespace QuickGraph.Algorithms
@@ -19,9 +18,6 @@ namespace QuickGraph.Algorithms
             )
             : base(visitedGraph)
         {
-            Contract.Requires(vertexFactory != null);
-            Contract.Requires(edgeFactory != null);
-
             this.VertexSetA = vertexSetA;
             this.VertexSetB = vertexSetB;
             this.VertexFactory = vertexFactory;

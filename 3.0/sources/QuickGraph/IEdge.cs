@@ -1,13 +1,9 @@
-﻿using QuickGraph.Contracts;
-using System.Diagnostics.Contracts;
-
-namespace QuickGraph
+﻿namespace QuickGraph
 {
     /// <summary>
     /// A directed edge
     /// </summary>
     /// <typeparam name="TVertex">type of the vertices</typeparam>
-    [ContractClass(typeof(IEdgeContract<>))]
     public interface IEdge<TVertex>
     {
         /// <summary>

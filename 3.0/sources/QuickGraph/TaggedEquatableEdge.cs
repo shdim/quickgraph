@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 using System.Diagnostics;
 
 namespace QuickGraph
@@ -22,8 +21,6 @@ namespace QuickGraph
         public TaggedEquatableEdge(TVertex source, TVertex target, TTag tag)
             : base(source, target)
         {
-            Contract.Ensures(Object.Equals(this.Tag, tag));
-
             this.tag = tag;
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 
 namespace QuickGraph
@@ -28,11 +27,6 @@ namespace QuickGraph
         /// <param name="target">The target.</param>
         public SEquatableEdge(TVertex source, TVertex target)
         {
-            Contract.Requires(source != null);
-            Contract.Requires(target != null);
-            Contract.Ensures(Contract.ValueAtReturn(out this).Source.Equals(source));
-            Contract.Ensures(Contract.ValueAtReturn(out this).Target.Equals(target));
-
             this.source = source;
             this.target = target;
         }
@@ -78,12 +72,6 @@ namespace QuickGraph
         /// </returns>
         public bool Equals(SEquatableEdge<TVertex> other)
         {
-            Contract.Ensures(
-                Contract.Result<bool>() ==
-                (this.Source.Equals(other.Source) &&
-                this.Target.Equals(other.Target))
-                );
-
             return
                 this.source.Equals(other.source) &&
                 this.target.Equals(other.target);

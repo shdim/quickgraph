@@ -4,7 +4,6 @@ using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Observers;
 using QuickGraph.Collections;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.ShortestPath
 {
@@ -38,9 +37,6 @@ namespace QuickGraph.Algorithms.ShortestPath
             )
             :base(host, visitedGraph)
         {
-            Contract.Requires(weights != null);
-            Contract.Requires(distanceRelaxer != null);
-
             this.weights = weights;
             this.distanceRelaxer = distanceRelaxer;
         }
@@ -55,17 +51,12 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         public GraphColor GetVertexColor(TVertex vertex)
         {
-            Contract.Assert(this.distances != null);
-
             return
                 this.vertexColors[vertex];
         }
 
         public bool TryGetDistance(TVertex vertex, out double distance)
         {
-            Contract.Requires(vertex != null);
-            Contract.Assert(this.distances != null);
-
             return this.distances.TryGetValue(vertex, out distance);
         }
 
@@ -116,8 +107,6 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         protected bool Relax(TEdge e)
         {
-            Contract.Requires(e != null);
-
             var source = e.Source;
             var target = e.Target;
             if (source.Equals(target))

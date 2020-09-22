@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.Observers
 {
@@ -30,8 +29,6 @@ namespace QuickGraph.Algorithms.Observers
 
         public VertexTimeStamperObserver(Dictionary<TVertex, int> discoverTimes)
         {
-            Contract.Requires(discoverTimes != null);
-
             this.discoverTimes = discoverTimes;
             this._finishTimes = null;
         }
@@ -40,9 +37,6 @@ namespace QuickGraph.Algorithms.Observers
             Dictionary<TVertex, int> discoverTimes,
             Dictionary<TVertex, int> finishTimes)
         {
-            Contract.Requires(discoverTimes != null);
-            Contract.Requires(finishTimes != null);
-
             this.discoverTimes = discoverTimes;
             this._finishTimes = finishTimes;
         }

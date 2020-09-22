@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.Observers
 {
@@ -26,8 +25,6 @@ namespace QuickGraph.Algorithms.Observers
 
         public VertexRecorderObserver(IList<TVertex> vertices)
         {
-            Contract.Requires(vertices != null);
-
             this.vertices = vertices;
         }
 

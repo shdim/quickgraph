@@ -1,7 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Predicates
 {
@@ -88,7 +87,6 @@ namespace QuickGraph.Predicates
             }
         }
 
-        [Pure]
         private bool FilterEdge(TEdge edge)
         {
             return this.VertexPredicate(edge.Source)
@@ -96,7 +94,6 @@ namespace QuickGraph.Predicates
                         && this.EdgePredicate(edge);
         }
 
-        [Pure]
         public bool ContainsEdge(TEdge edge)
         {
             return

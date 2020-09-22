@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
-using QuickGraph.Contracts;
 
 namespace QuickGraph
 {
@@ -9,7 +7,6 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex">type of the vertices</typeparam>
     /// <typeparam name="TEdge">type of the edges</typeparam>
-    [ContractClass(typeof(IMutableGraphContract<,>))]
     public interface IMutableGraph<TVertex,TEdge> 
         : IGraph<TVertex,TEdge>
         where TEdge : IEdge<TVertex>

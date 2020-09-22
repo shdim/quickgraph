@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using QuickGraph.Contracts;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph
 {
-    [ContractClass(typeof(IIncidenceGraphContract<,>))]
     public interface IIncidenceGraph<TVertex, TEdge> 
         : IImplicitGraph<TVertex,TEdge>
         where TEdge : IEdge<TVertex>

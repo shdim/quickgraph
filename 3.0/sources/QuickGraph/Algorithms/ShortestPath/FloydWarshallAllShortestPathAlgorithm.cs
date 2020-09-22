@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 using QuickGraph.Collections;
 using System.Diagnostics;
 using System.IO;
@@ -44,7 +43,6 @@ namespace QuickGraph.Algorithms.ShortestPath
 
             public VertexData(double distance, TEdge edge)
             {
-                Contract.Requires(edge != null);
                 this.Distance = distance;
                 this._predecessor = default(TVertex);
                 this.predecessorStored = false;
@@ -54,20 +52,11 @@ namespace QuickGraph.Algorithms.ShortestPath
 
             public VertexData(double distance, TVertex predecessor)
             {
-                Contract.Requires(predecessor != null);
-
                 this.Distance = distance;
                 this._predecessor = predecessor;
                 this.predecessorStored = true;
                 this._edge = default(TEdge);
                 this.edgeStored = false;
-            }
-
-            [ContractInvariantMethod]
-            void ObjectInvariant()
-            {
-                Contract.Invariant(!this.edgeStored || this._edge != null);
-                Contract.Invariant(!this.predecessorStored || this._predecessor != null);
             }
 
             public override string ToString()
@@ -87,9 +76,6 @@ namespace QuickGraph.Algorithms.ShortestPath
             )
             : base(host, visitedGraph)
         {
-            Contract.Requires(weights != null);
-            Contract.Requires(distanceRelaxer != null);
-
             this.weights = weights;
             this.distanceRelaxer = distanceRelaxer;
             this.data = new Dictionary<SEquatableEdge<TVertex>, VertexData>();
@@ -101,9 +87,6 @@ namespace QuickGraph.Algorithms.ShortestPath
             IDistanceRelaxer distanceRelaxer)
             : base(visitedGraph)
         {
-            Contract.Requires(weights != null);
-            Contract.Requires(distanceRelaxer != null);
-
             this.weights =weights;
             this.distanceRelaxer = distanceRelaxer;
             this.data = new Dictionary<SEquatableEdge<TVertex>, VertexData>();
@@ -118,9 +101,6 @@ namespace QuickGraph.Algorithms.ShortestPath
 
         public bool TryGetDistance(TVertex source, TVertex target, out double cost)
         {
-            Contract.Requires(source != null);
-            Contract.Requires(target != null);
-
             VertexData value;
             if (this.data.TryGetValue(new SEquatableEdge<TVertex>(source, target), out value))
             {
@@ -139,9 +119,6 @@ namespace QuickGraph.Algorithms.ShortestPath
             TVertex target,
             out IEnumerable<TEdge> path)
         {
-            Contract.Requires(source != null);
-            Contract.Requires(target != null);
-
             if (source.Equals(target))
             {
                 path = null;
@@ -160,7 +137,6 @@ namespace QuickGraph.Algorithms.ShortestPath
             while (todo.Count > 0)
             {
                 var current = todo.Pop();
-                Contract.Assert(!current.Source.Equals(current.Target));
                 VertexData data;
                 if (this.data.TryGetValue(current, out data))
                 {
@@ -172,15 +148,11 @@ namespace QuickGraph.Algorithms.ShortestPath
                         TVertex intermediate;
                         if (data.TryGetPredecessor(out intermediate))
                         {
-#if DEBUG && !SILVERLIGHT
-                            Contract.Assert(set.Add(intermediate));
-#endif
                             todo.Push(new SEquatableEdge<TVertex>(intermediate, current.Target));
                             todo.Push(new SEquatableEdge<TVertex>(current.Source, intermediate));
                         }
                         else
                         {
-                            Contract.Assert(false);
                             path = null;
                             return false;
                         }
@@ -194,8 +166,6 @@ namespace QuickGraph.Algorithms.ShortestPath
                 }
             }
 
-            Contract.Assert(todo.Count == 0);
-            Contract.Assert(edges.Count > 0);
             path = edges.ToArray();
             return true;
         }

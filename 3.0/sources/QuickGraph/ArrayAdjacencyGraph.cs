@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics.Contracts;
 using System.Diagnostics;
 
 namespace QuickGraph
@@ -31,7 +30,6 @@ namespace QuickGraph
             IVertexAndEdgeListGraph<TVertex, TEdge> visitedGraph
             )
         {
-            Contract.Requires(visitedGraph != null);
             this.vertexOutEdges = new Dictionary<TVertex, TEdge[]>(visitedGraph.VertexCount);
             this.edgeCount = visitedGraph.EdgeCount;
             foreach (var vertex in visitedGraph.Vertices)
@@ -46,10 +44,6 @@ namespace QuickGraph
             int edgeCount
             )
         {
-            Contract.Requires(vertexOutEdges != null);
-            Contract.Requires(edgeCount >= 0);
-            Contract.Requires(edgeCount == Enumerable.Sum(vertexOutEdges, kv => (kv.Value == null) ? 0 : kv.Value.Length));
-
             this.vertexOutEdges = vertexOutEdges;
             this.edgeCount = edgeCount;
         }

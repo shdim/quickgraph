@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.Observers
 {
@@ -15,7 +14,6 @@ namespace QuickGraph.Algorithms.Observers
 
         public DisposableAction(Action action)
         {
-            Contract.Requires(action != null);
             this.action = action;
         }
 

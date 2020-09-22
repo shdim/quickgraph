@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using QuickGraph.Contracts;
 
 namespace QuickGraph
 {
@@ -10,7 +8,6 @@ namespace QuickGraph
     /// </summary>
     /// <typeparam name="TVertex">type of the vertices</typeparam>
     /// <typeparam name="TEdge">type of the edges</typeparam>
-    [ContractClass(typeof(IEdgeListGraphContract<,>))]
     public interface IEdgeListGraph<TVertex, TEdge> 
         : IGraph<TVertex, TEdge>
         , IEdgeSet<TVertex, TEdge>

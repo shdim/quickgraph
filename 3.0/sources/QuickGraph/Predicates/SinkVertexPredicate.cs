@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Predicates
 {
@@ -13,8 +12,6 @@ namespace QuickGraph.Predicates
 
         public SinkVertexPredicate(IIncidenceGraph<TVertex, TEdge> visitedGraph)
         {
-            Contract.Requires(visitedGraph != null);
-
             this.visitedGraph = visitedGraph;
         }
 

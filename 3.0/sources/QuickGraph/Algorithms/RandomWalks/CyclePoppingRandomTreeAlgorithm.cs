@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace QuickGraph.Algorithms.RandomWalks
@@ -41,7 +40,6 @@ namespace QuickGraph.Algorithms.RandomWalks
             )
             :base(host, visitedGraph)
         {
-            Contract.Requires(edgeChain != null);
             this.edgeChain = edgeChain;
         }
 
@@ -80,7 +78,6 @@ namespace QuickGraph.Algorithms.RandomWalks
             }
             set
             {
-                Contract.Requires(value != null);
                 this.rnd = value;
             }
         }
@@ -159,8 +156,6 @@ namespace QuickGraph.Algorithms.RandomWalks
 
         private void Tree(TVertex u, TEdge next)
         {
-            Contract.Requires(next != null);
-
             this.successors[u] = next;
             OnTreeEdge(next);
         }
@@ -191,9 +186,6 @@ namespace QuickGraph.Algorithms.RandomWalks
 
         public void RandomTreeWithRoot(TVertex root)
         {
-            Contract.Requires(root != null);
-            Contract.Requires(this.VisitedGraph.ContainsVertex(root));
-
             this.SetRootVertex(root);
             this.Compute();
         }

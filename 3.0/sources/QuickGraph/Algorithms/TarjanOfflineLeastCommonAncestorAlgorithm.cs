@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using QuickGraph.Collections;
 using QuickGraph.Algorithms.Search;
-using System.Diagnostics.Contracts;
 using QuickGraph.Algorithms.Services;
 
 namespace QuickGraph.Algorithms
@@ -48,16 +47,11 @@ namespace QuickGraph.Algorithms
 
         public void SetVertexPairs(IEnumerable<SEquatableEdge<TVertex>> pairs)
         {
-            Contract.Requires(pairs != null);
-
             this.pairs = new List<SEquatableEdge<TVertex>>(pairs).ToArray();
         }
 
         public void Compute(TVertex root, IEnumerable<SEquatableEdge<TVertex>> pairs)
         {
-            Contract.Requires(root != null);
-            Contract.Requires(pairs != null);
-
             this.pairs = Enumerable.ToArray(pairs);
             this.Compute(root);
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.MaximumFlow
 {
@@ -27,9 +26,6 @@ namespace QuickGraph.Algorithms.MaximumFlow
             )
             :base(host, visitedGraph)
         {
-            Contract.Requires(vertexFactory != null);
-            Contract.Requires(edgeFactory != null);
-
             this.vertexFactory = vertexFactory;
             this.edgeFactory = edgeFactory;
         }
@@ -67,7 +63,6 @@ namespace QuickGraph.Algorithms.MaximumFlow
         public event VertexAction<TVertex> SuperSourceAdded;
         private void OnSuperSourceAdded(TVertex v)
         {
-            Contract.Requires(v != null);
             var eh = this.SuperSourceAdded;
             if (eh != null)
                 eh(v);
@@ -76,7 +71,6 @@ namespace QuickGraph.Algorithms.MaximumFlow
         public event VertexAction<TVertex> SuperSinkAdded;
         private void OnSuperSinkAdded(TVertex v)
         {
-            Contract.Requires(v != null);
             var eh = this.SuperSinkAdded;
             if (eh != null)
                 eh(v);
@@ -85,7 +79,6 @@ namespace QuickGraph.Algorithms.MaximumFlow
         public event EdgeAction<TVertex, TEdge> EdgeAdded;
         private void OnEdgeAdded(TEdge e)
         {
-            Contract.Requires(e != null);
             var eh = this.EdgeAdded;
             if (eh != null)
                 eh(e);

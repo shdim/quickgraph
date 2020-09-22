@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.Observers
 {
@@ -31,9 +30,6 @@ namespace QuickGraph.Algorithms.Observers
             IList<TEdge> endPathEdges
             )
         {
-            Contract.Requires(edgePredecessors != null);
-            Contract.Requires(endPathEdges != null);
-
             this.edgePredecessors = edgePredecessors;
             this.endPathEdges = endPathEdges;
         }

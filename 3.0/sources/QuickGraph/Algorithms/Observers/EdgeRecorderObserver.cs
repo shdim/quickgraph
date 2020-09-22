@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.Observers
 {
@@ -27,8 +26,6 @@ namespace QuickGraph.Algorithms.Observers
 
         public EdgeRecorderObserver(IList<TEdge> edges)
         {
-            Contract.Requires(edges != null);
-
             this.edges = edges;
         }
 
@@ -50,8 +47,6 @@ namespace QuickGraph.Algorithms.Observers
 
         private void RecordEdge(TEdge args)
         {
-            Contract.Requires(args != null);
-
             this.Edges.Add(args);
         }
     }

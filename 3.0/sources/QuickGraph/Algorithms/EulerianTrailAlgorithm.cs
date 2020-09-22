@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Observers;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 using System.Linq;
 
 namespace QuickGraph.Algorithms
@@ -77,7 +76,6 @@ namespace QuickGraph.Algorithms
         public event EdgeAction<TVertex,TEdge> TreeEdge;
         private void OnTreeEdge(TEdge e)
         {
-            Contract.Requires(e != null);
             var eh = this.TreeEdge;
             if (eh != null)
                 eh(e);
@@ -86,8 +84,6 @@ namespace QuickGraph.Algorithms
         public event EdgeAction<TVertex,TEdge> CircuitEdge;
         private void OnCircuitEdge(TEdge e)
         {
-            Contract.Requires(e != null);
-
             var eh = this.CircuitEdge;
             if (eh != null)
                 eh(e);
@@ -96,8 +92,6 @@ namespace QuickGraph.Algorithms
         public event EdgeAction<TVertex,TEdge> VisitEdge;
         private void OnVisitEdge(TEdge e)
         {
-            Contract.Requires(e != null);
-
             var eh = this.VisitEdge;
             if (eh != null)
                 eh(e);
@@ -105,8 +99,6 @@ namespace QuickGraph.Algorithms
 
         private bool Search(TVertex u)
         {
-            Contract.Requires(u != null);
-
             foreach (var e in SelectOutEdgesNotInCircuit(u))
             {
                 OnTreeEdge(e);
@@ -160,8 +152,6 @@ namespace QuickGraph.Algorithms
         /// <returns>number of eulerian trails</returns>
         public static int ComputeEulerianPathCount(IVertexAndEdgeListGraph<TVertex,TEdge> g)
         {
-            Contract.Requires(g != null);
-
             if (g.EdgeCount < g.VertexCount)
                 return 0;
 
@@ -403,7 +393,6 @@ namespace QuickGraph.Algorithms
         /// <exception cref="Exception">Eulerian trail not computed yet.</exception>
         public ICollection<ICollection<TEdge>> Trails(TVertex s)
         {
-            Contract.Requires(s != null);
             if (this.Circuit.Count == 0)
                 throw new InvalidOperationException("Circuit is empty");
 

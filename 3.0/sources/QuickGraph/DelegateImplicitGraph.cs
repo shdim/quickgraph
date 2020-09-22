@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Diagnostics.Contracts;
 using System.Diagnostics;
 using System.Linq;
 
@@ -24,8 +23,6 @@ namespace QuickGraph
         public DelegateImplicitGraph(
             TryFunc<TVertex, IEnumerable<TEdge>> tryGetOutEdges)
         {
-            Contract.Requires(tryGetOutEdges != null);
-
             this.tryGetOutEdges = tryGetOutEdges;
         }
 

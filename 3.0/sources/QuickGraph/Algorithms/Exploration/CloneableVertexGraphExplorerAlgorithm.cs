@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 using QuickGraph.Predicates;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.Exploration
 {
@@ -80,8 +79,6 @@ namespace QuickGraph.Algorithms.Exploration
         public event VertexAction<TVertex> DiscoverVertex;
         private void OnDiscoverVertex(TVertex v)
         {
-            Contract.Requires(v != null);
-
             this.VisitedGraph.AddVertex(v);
             this.unexploredVertices.Enqueue(v);
 
@@ -92,8 +89,6 @@ namespace QuickGraph.Algorithms.Exploration
         public event EdgeAction<TVertex,TEdge> TreeEdge;
         private void OnTreeEdge(TEdge e)
         {
-            Contract.Requires(e != null);
-
             var eh = this.TreeEdge;
             if (eh != null)
                 eh(e);
@@ -101,7 +96,6 @@ namespace QuickGraph.Algorithms.Exploration
         public event EdgeAction<TVertex, TEdge> BackEdge;
         private void OnBackEdge(TEdge e)
         {
-            Contract.Requires(e != null);
             var eh = this.BackEdge;
             if (eh != null)
                 eh(e);
@@ -109,7 +103,6 @@ namespace QuickGraph.Algorithms.Exploration
         public event EdgeAction<TVertex, TEdge> EdgeSkipped;
         private void OnEdgeSkipped(TEdge e)
         {
-            Contract.Requires(e != null);
             var eh = this.EdgeSkipped;
             if (eh != null)
                 eh(e);

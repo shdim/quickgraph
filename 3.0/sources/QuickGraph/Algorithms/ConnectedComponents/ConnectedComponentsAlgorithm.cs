@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 using QuickGraph.Algorithms.Search;
 using QuickGraph.Algorithms.Services;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms.ConnectedComponents
 {
@@ -34,8 +33,6 @@ namespace QuickGraph.Algorithms.ConnectedComponents
             IDictionary<TVertex, int> components)
             :base(host, visitedGraph)
         {
-            Contract.Requires(components != null);
-
             this.components = components;
         }
 

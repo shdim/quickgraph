@@ -1,7 +1,6 @@
 ﻿using System;
 using QuickGraph.Algorithms.Services;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 
 namespace QuickGraph.Algorithms
 {
@@ -21,7 +20,6 @@ namespace QuickGraph.Algorithms
         /// <param name="visitedGraph"></param>
         protected AlgorithmBase(IAlgorithmComponent host, TGraph visitedGraph)
         {
-            Contract.Requires(visitedGraph != null);
             if (host == null)
                 host = this;
             this.visitedGraph = visitedGraph;
@@ -30,7 +28,6 @@ namespace QuickGraph.Algorithms
 
         protected AlgorithmBase(TGraph visitedGraph)
         {
-            Contract.Requires(visitedGraph != null);
             this.visitedGraph = visitedGraph;
             this.services = new AlgorithmServices(this);
         }
@@ -134,7 +131,6 @@ namespace QuickGraph.Algorithms
 
         protected void BeginComputation()
         {
-            Contract.Requires(this.State == ComputationState.NotRunning);
             lock (this.syncRoot)
             {
                 this.state = ComputationState.Running;
@@ -146,9 +142,6 @@ namespace QuickGraph.Algorithms
 
         protected void EndComputation()
         {
-            Contract.Requires(
-                this.State == ComputationState.Running || 
-                this.State == ComputationState.Aborted);
             lock (this.syncRoot)
             {
                 switch (this.state)
@@ -195,7 +188,6 @@ namespace QuickGraph.Algorithms
         Dictionary<Type, object> _services;
         protected virtual bool TryGetService(Type serviceType, out object service)
         {
-            Contract.Requires(serviceType != null);
             lock (this.SyncRoot)
             {
                 if (this._services == null)
